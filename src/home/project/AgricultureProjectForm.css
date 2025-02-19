@@ -1,0 +1,183 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+}
+
+.form-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.form-box {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    width: 400px;
+}
+
+h2 {
+    text-align: center;
+    color: #2d572c;
+}
+
+label {
+    display: block;
+    margin: 10px 0 5px;
+    font-weight: bold;
+    color: #333;
+}
+
+input, select {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+.form-row {
+    display: flex;
+    justify-content: space-between;
+}
+
+.form-row div {
+    width: 48%;
+}
+
+button {
+    width: 100%;
+    background: #2d572c;
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+button:hover {
+    background: #1e3c1e;
+}
+
+.agriculture-projects-container {
+    font-family: Arial, sans-serif;
+    margin: 20px auto;
+    padding: 20px;
+    max-width: 900px;
+    background-color: #f7f7f7;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.agriculture-projects-title {
+    text-align: center;
+    color: #2c3e50;
+    font-size: 26px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.agriculture-projects-error {
+    text-align: center;
+    font-size: 16px;
+    font-weight: bold;
+    color: red;
+}
+
+.agriculture-projects-empty {
+    text-align: center;
+    font-size: 18px;
+    color: #7f8c8d;
+}
+
+.agriculture-projects-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 15px;
+}
+
+.agriculture-project-card {
+    background: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 15px;
+    width: 320px;
+    transition: transform 0.3s ease-in-out;
+}
+
+.agriculture-project-card:hover {
+    transform: scale(1.03);
+}
+
+.agriculture-project-card-title {
+    color: #27ae60;
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 8px;
+}
+
+.agriculture-project-card-info {
+    font-size: 16px;
+    margin: 5px 0;
+    color: #555;
+}
+
+.agriculture-project-card-info strong {
+    color: #34495e;
+}
+
+@media (max-width: 600px) {
+    .agriculture-projects-container {
+        padding: 15px;
+    }
+
+    .agriculture-project-card {
+        width: 100%;
+    }
+}
+
+.allocated-products-container {
+    padding: 20px;
+    max-width: 600px;
+    margin: auto;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.allocated-products-title {
+    text-align: center;
+    color: #333;
+}
+
+.error-message {
+    color: red;
+    text-align: center;
+}
+
+.no-products-message {
+    text-align: center;
+    color: #777;
+}
+
+.allocated-products-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.allocated-product-card {
+    background-color: white;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.product-owner {
+    margin: 0;
+    color: #2c3e50;
+}

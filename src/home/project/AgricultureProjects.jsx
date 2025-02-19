@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { authService } from "../api-service/authService";
+import { authService } from "../../api-service/authService";
 
 const AgricultureProjects = () => {
     const [projects, setProjects] = useState([]);

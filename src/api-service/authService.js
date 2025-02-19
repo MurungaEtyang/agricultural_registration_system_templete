@@ -1,7 +1,9 @@
 import axios from 'axios';
 import {jwtDecode} from "jwt-decode";
+import AgricultureProjectForm from "../home/project/AgricultureProjectForm";
+import {api_url} from "./url";
 
-const API_URL = "http://localhost:5000";
+const API_URL = api_url.base_url;
 
 export const authService = {
     login: async (email, password) => {
@@ -44,6 +46,62 @@ export const authService = {
             return { success: false, error: 'An error occurred' };
         }
     },
+
+
+    AgricultureProjectForm: async (crop_type, expected_yield, land_size, location, land_size_unit, expected_yield_unit) => {
+        try {
+            const token = authService.getToken();
+            const config = {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                    'Content-Type': 'application/json'
+                }
+            };
+            const response = await axios.post(`${API_URL}/api/kenf/v1/projects`,
+                { crop_type, expected_yield, land_size, location, land_size_unit, expected_yield_unit }, config);
+
+            return { success: true, message: response.data.message };
+        } catch (error) {
+            console.error("Create Agriculture Project error:", error);
+            return { success: false, error: error.response ? error.response.data.message : 'An error occurred' };
+        }
+    },
+
+
+    GetAgricultureProjectForm: async () => {
+        try {
+            const token = authService.getToken();
+            const config = {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                    'Content-Type': 'application/json'
+                }
+            };
+            const response = await axios.get(`${API_URL}/api/kenf/v1/user-projects`, config);
+            return { success: true, message: response.data.message, response: response.data };
+        } catch (error) {
+            console.error("Get Agriculture Project error:", error);
+            return { success: false, error: error.response ? error.response.data.message : 'An error occurred' };
+        }
+    },
+
+    getAllocatedProducts : async () => {
+        try {
+            const token = authService.getToken();
+            const config = {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                    'Content-Type': 'application/json'
+                }
+            };
+            const response = await axios.get(`${API_URL}/api/kenf/v1/user-allocations`, config);
+            return { success: true, message: response.data.message, response: response.data };
+        } catch (error) {
+            console.error("Get Agriculture Project error:", error);
+            return { success: false, error: error.response ? error.response.data.message : 'An error occurred' };
+        }
+    },
+
 
     getUser: () => {
         return JSON.parse(localStorage.getItem('loggedInUser'));

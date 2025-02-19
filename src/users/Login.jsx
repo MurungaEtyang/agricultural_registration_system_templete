@@ -1,7 +1,7 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import {authService} from "./authService";
-
+import { authService } from "../api-service/authService";
+import "bootstrap/dist/css/bootstrap.min.css"; // Ensure Bootstrap is imported
 
 const Login = () => {
     const [email, setEmail] = useState("");
@@ -9,30 +9,42 @@ const Login = () => {
     const [error, setError] = useState("");
     const navigate = useNavigate();
 
-    const handleLogin = (e) => {
+    useEffect(() => {
+        setError("");
+    }, [email, password]);
+
+    const handleLogin = async (e) => {
         e.preventDefault();
-        const result = authService.login(email, password);
-        if (result.success) {
-            navigate("/dashboard");
-        } else {
-            setError(result.error);
+        try {
+            const result = await authService.login(email, password);
+            if (result.success) {
+                navigate("/dashboard");
+            } else {
+                setError(result.error || "Invalid credentials. Please try again.");
+            }
+        } catch (err) {
+            setError("An error occurred. Please check your internet connection.");
         }
     };
 
     return (
-        <div className="min-h-screen flex items-center justify-center bg-blue-900 text-white">
-            <div className="bg-blue-800 p-6 rounded-lg shadow-lg w-96">
-                <h2 className="text-2xl font-bold mb-4 text-center">Login</h2>
-                {error && <p className="text-red-500 text-center">{error}</p>}
+        <div className="d-flex vh-100 justify-content-center align-items-center bg-primary text-white">
+            <div className="card p-4 shadow-lg" style={{ width: "400px", backgroundColor: "#1E3A8A" }}>
+                <h2 className="text-center mb-3">Login</h2>
+                {error && <div className="alert alert-danger text-center">{error}</div>}
                 <form onSubmit={handleLogin}>
-                    <input type="email" placeholder="Email" className="w-full p-2 rounded bg-blue-700 text-white mb-2"
-                           value={email} onChange={(e) => setEmail(e.target.value)} required />
-                    <input type="password" placeholder="Password" className="w-full p-2 rounded bg-blue-700 text-white mb-2"
-                           value={password} onChange={(e) => setPassword(e.target.value)} required />
-                    <button type="submit" className="w-full p-2 bg-blue-600 hover:bg-blue-500 rounded mt-2">Login</button>
+                    <div className="mb-3">
+                        <input type="email" className="form-control" placeholder="Email"
+                               value={email} onChange={(e) => setEmail(e.target.value)} required />
+                    </div>
+                    <div className="mb-3">
+                        <input type="password" className="form-control" placeholder="Password"
+                               value={password} onChange={(e) => setPassword(e.target.value)} required />
+                    </div>
+                    <button type="submit" className="btn btn-primary w-100">Login</button>
                 </form>
-                <p className="text-center mt-4">
-                    Don't have an account? <a href="/register" className="text-blue-300">Register</a>
+                <p className="text-center mt-3">
+                    Don't have an account? <a href="/register" className="text-light">Register</a>
                 </p>
             </div>
         </div>

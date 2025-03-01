@@ -4,6 +4,7 @@ import { authService } from "../../api-service/authService";
 
 const AgricultureProjectForm = () => {
     const [formData, setFormData] = useState({
+        project_name: "",
         crop_type: "",
         expected_yield: "",
         land_size: "",
@@ -23,6 +24,7 @@ const AgricultureProjectForm = () => {
         e.preventDefault();
         setLoading(true);
         const result = await authService.AgricultureProjectForm(
+            formData.project_name,
             formData.crop_type,
             formData.expected_yield,
             formData.land_size,
@@ -43,9 +45,19 @@ const AgricultureProjectForm = () => {
     return (
         <div className="form-container">
             <div className="form-box">
-                <h2>Create Agriculture Project</h2>
+                <h2>Apply for Agricultural farm inputs</h2>
                 {message && <div className="alert">{message}</div>}
                 <form onSubmit={handleSubmit}>
+                    <label>Project Name</label>
+                    <input
+                        type="text"
+                        name="project_name"
+                        value={formData.project_name}
+                        onChange={handleChange}
+                        placeholder="Enter project name (e.g., Coffee Farm)"
+                        required
+                    />
+
                     <label>Crop Type</label>
                     <input
                         type="text"

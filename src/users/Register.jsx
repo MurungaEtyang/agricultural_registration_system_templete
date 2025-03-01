@@ -27,7 +27,7 @@ const Register = () => {
             setSuccessMessage(result.message);
             setError("");
             setTimeout(() => {
-                navigate("/dashboard");
+                navigate("/login");
             }, 2000);
         } else {
             setSuccessMessage("");
@@ -68,18 +68,6 @@ const Register = () => {
                         />
                     </div>
 
-                    <div className="mb-3">
-                        <label className="form-label">Role</label>
-                        <select
-                            className="form-select"
-                            value={role}
-                            onChange={(e) => setRole(e.target.value)}
-                            required
-                        >
-                            <option value="farmer">Farmer</option>
-                            <option value="admin">Admin</option>
-                        </select>
-                    </div>
 
                     <div className="mb-3">
                         <label className="form-label">Password</label>

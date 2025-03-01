@@ -103,6 +103,25 @@ export const adminService = {
     },
 
 
+    farmersProducts: async (project_id, input_id, quantity, mpesa_phone_number) => {
+        try {
+            const token = authService.getToken();
+            const config = {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                    'Content-Type': 'application/json'
+                }
+            };
+            const body = { project_id: project_id, input_id: input_id, quantity: quantity, mpesa_phone_number: mpesa_phone_number };
+            const response = await axios.post(`${API_URL}/api/kenf/v1/quantity-allocations`, body, config);
+            return { success: true, message: response.data.message, response: response.data };
+        } catch (error) {
+            console.error("Get Inventory Data Input error:", error);
+            return { success: false, error: error.response ? error.response.data.message : 'An error occurred' };
+        }
+    },
+
+
     AllocatedProducts : async () => {
         try {
             const token = authService.getToken();
@@ -119,6 +138,9 @@ export const adminService = {
             return { success: false, error: error.response ? error.response.data.message : 'An error occurred' };
         }
     },
+
+
+
 
 
 };

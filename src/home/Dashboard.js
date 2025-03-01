@@ -7,6 +7,7 @@ import AgricultureProjects from "./project/AgricultureProjects";
 import AllocatedProducts from "./project/getAllocatedProducts";
 import "./dashboard.css";
 import Home from "./Home";
+import ModeOfPayment from "./payment/ModeOfPayment";
 
 const Dashboard = () => {
     const [user, setUser] = useState(null);
@@ -50,18 +51,20 @@ const Dashboard = () => {
                     <li className="btn btn-primary" onClick={() => handleSectionChange("allocated-products")}>
                         Allocated Products
                     </li>
+                    <li className="btn btn-primary" onClick={() => handleSectionChange("payment")}>
+                        Payment
+                    </li>
                 </ul>
 
-                {/* User Icon with Dropdown Menu */}
                 <div className="user-icon-container" onClick={() => setShowDropdown(!showDropdown)}>
-                    <FaUserCircle size={30} className="user-icon" />
+                <FaUserCircle size={30} className="user-icon" />
                     {showDropdown && user && (
                         <div className="dropdown-menu">
                             <p><strong>{user.fullName}</strong></p>
                             <p>{user.email}</p>
                             <p>Role: {user.role}</p>
 
-                            {user.role === "admin" && (
+                            {(user.role === "admin" || user.role === "secretary") && (
                                 <button className="btn btn-primary" onClick={() => navigate("/admin")}>
                                     Admin Panel
                                 </button>
@@ -94,6 +97,11 @@ const Dashboard = () => {
                 {showSection === "allocated-products" && (
                     <section className="dashboard-section">
                         <AllocatedProducts />
+                    </section>
+                )}
+                {showSection === "payment" && (
+                    <section className="dashboard-section">
+                        <ModeOfPayment/>
                     </section>
                 )}
             </div>

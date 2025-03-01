@@ -25,15 +25,10 @@ export const authService = {
         }
     },
 
-    register: async (fullName, email, password, role) => {
+    register: async (fullName, email, password) => {
         try {
-            const response = await axios.post(`${API_URL}/api/kenf/v1/register/users`, { fullName, email, password, role });
-            if (response.data.token) {
-                const token = response.data.token;
-                const decodedToken = jwtDecode(token);
-
-                localStorage.setItem('authToken', token);
-                localStorage.setItem('loggedInUser', JSON.stringify(decodedToken));
+            const response = await axios.post(`${API_URL}/api/kenf/v1/register/users`, { fullName, email, password });
+            if (response.data.message) {
                 return { success: true, message: response.data.message };
             } else {
                 return { success: false, error: response.data.error || 'Registration failed. Please try again.' };
@@ -48,7 +43,7 @@ export const authService = {
     },
 
 
-    AgricultureProjectForm: async (crop_type, expected_yield, land_size, location, land_size_unit, expected_yield_unit) => {
+    AgricultureProjectForm: async (project_name, crop_type, expected_yield, land_size, location, land_size_unit, expected_yield_unit) => {
         try {
             const token = authService.getToken();
             const config = {
@@ -58,7 +53,7 @@ export const authService = {
                 }
             };
             const response = await axios.post(`${API_URL}/api/kenf/v1/projects`,
-                { crop_type, expected_yield, land_size, location, land_size_unit, expected_yield_unit }, config);
+                { project_name, crop_type, expected_yield, land_size, location, land_size_unit, expected_yield_unit }, config);
 
             return { success: true, message: response.data.message };
         } catch (error) {

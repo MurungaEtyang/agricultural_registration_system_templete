@@ -29,7 +29,9 @@ const AgricultureProjects = () => {
                 <div className="agriculture-projects-list">
                     {projects.map((project, index) => (
                         <div key={index} className="agriculture-project-card">
-                            <h3 className="agriculture-project-card-title">{project.crop_type}</h3>
+                            <h2 className="agriculture-project-card-title">{project.project_name}</h2>
+                            <p className="agriculture-project-card-info"><strong>Crop Type:</strong> {project.crop_type}
+                            </p>
                             <p className="agriculture-project-card-info"><strong>Location:</strong> {project.location}</p>
                             <p className="agriculture-project-card-info"><strong>Land Size:</strong> {project.land_size} {project.land_size_unit}</p>
                             <p className="agriculture-project-card-info"><strong>Expected Yield:</strong> {project.expected_yield} {project.expected_yield_unit}</p>
